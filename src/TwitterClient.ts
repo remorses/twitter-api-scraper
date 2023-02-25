@@ -125,6 +125,18 @@ export default class TwitterClient {
     return result
   }
 
+  followers = async (
+    query: SearchQuery,
+    maxTweets: number = 100,
+    pageToken?: string
+  ): Promise<ParsedSearchResult> => {
+    this.say('Searching...')
+    const data = await clientSearch(this.apiClient, query, maxTweets, pageToken)
+    const result = parseSearch(data)
+    this.say('Searched tweets')
+    return result
+  }
+
   searchRaw = async (
     query: SearchQuery,
     maxTweets: number = 100,
